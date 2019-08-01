@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.jboss.el.cache.BeanPropertiesCache;
+
 /**
  * Utility methods for this portion of the Jakarta Expression Language implementation
  *
@@ -559,39 +561,9 @@ class ELUtil {
      * therefore inaccessible. To correct this, a version of the same method must be found in a superclass or interface.
      */
     static Method getMethod(Class<?> type, Object base, Method m) {
-        // If base is null, method MUST be static
-        // If base is non-null, method may be static or non-static
-        if (m == null ||
-                (Modifier.isPublic(type.getModifiers()) &&
-                        (canAccess(base, m) || base != null && canAccess(null, m)))) {
-            return m;
-        }
-        Class<?>[] inf = type.getInterfaces();
-        Method mp = null;
-        for (int i = 0; i < inf.length; i++) {
-            try {
-                mp = inf[i].getMethod(m.getName(), m.getParameterTypes());
-                mp = getMethod(mp.getDeclaringClass(), base, mp);
-                if (mp != null) {
-                    return mp;
-                }
-            } catch (NoSuchMethodException e) {
-                // Ignore
-            }
-        }
-        Class<?> sup = type.getSuperclass();
-        if (sup != null) {
-            try {
-                mp = sup.getMethod(m.getName(), m.getParameterTypes());
-                mp = getMethod(mp.getDeclaringClass(), base, mp);
-                if (mp != null) {
-                    return mp;
-                }
-            } catch (NoSuchMethodException e) {
-                // Ignore
-            }
-        }
-        return null;
+        // BeanPropertiesCache.getMethod is implemented with the logic from this method in the Eclipse Jakarta EL API
+        // We delegate to that here to avoid the need to duplicate that logic
+        return BeanPropertiesCache.getMethod(type, base, m);
     }
 
     static Constructor<?> getConstructor(Class<?> type, Constructor<?> c) {
