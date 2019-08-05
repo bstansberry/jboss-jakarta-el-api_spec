@@ -78,21 +78,6 @@
         <url>https://issues.redhat.com/projects/JBEE</url>
     </issueManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.10.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <properties>
         <!-- Make sure the two versions are in sync with the maven version -->
         <spec.version>6.0</spec.version>
@@ -101,7 +86,36 @@
         <bundle.symbolicName>jakarta.el-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
         <implementation.vendorName>JBoss by Red Hat</implementation.vendorName>
+        <version.org.glassfish.jakarta.el>5.0.0</version.org.glassfish.jakarta.el>
+        <version.org.junit.jupiter>5.11.0</version.org.junit.jupiter>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>${version.org.glassfish.jakarta.el}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.el</groupId>
+                    <artifactId>jakarta.el-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${version.org.junit.jupiter}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${version.org.junit.jupiter}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <resources>
