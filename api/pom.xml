@@ -207,6 +207,12 @@
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
                     </supportedProjectTypes>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
                     <instructions>
                         <Bundle-Description>Jakarta Expression Language ${spec.version}</Bundle-Description>
                         <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
@@ -249,6 +255,9 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
                     <includePom>true</includePom>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
                 </configuration>
                 <executions>
                     <execution>
@@ -292,6 +301,9 @@ Use is subject to <a href="{@docRoot}/doc-files/EFSL.html" target="_top">license
                                     </packages>
                                 </group>
                             </groups>
+                            <archive>
+                                <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                            </archive>
                         </configuration>
                     </execution>
                 </executions>
