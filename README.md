@@ -1,10 +1,8 @@
 # Jakarta Expression Language
 
-This repository contains the source for:
+This is a fork of the Jakarta Expression Language repository.
 
- - the Jakarta Expression Language [API](https://javadoc.io/doc/jakarta.el/jakarta.el-api/) (/api) - 
- - the Jakarta Expression Language [specification](https://jakarta.ee/specifications/expression-language/4.0/jakarta-expression-language-spec-4.0.html) (/spec)
-
+[Online JavaDoc](https://javadoc.io/doc/jakarta.el/jakarta.el-api/)
 
 ## Building
 
@@ -16,17 +14,7 @@ Jakarta Expression Language API can be built by executing the following from the
 cd api
 mvn clean package
 ```
-The API jar can then be found in `/impl/target`.
-
-### Specification
-
-Jakarta Expression Language specification can be built by executing the following from the project root:
-
-```
-cd spec
-mvn clean package
-```
-The API jar can then be found in `/spec/target`.
+The API jar can then be found in `/api/target`.
 
 
 ## Making Changes
