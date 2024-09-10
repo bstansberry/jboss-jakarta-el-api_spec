@@ -233,7 +233,7 @@ class ELUtil {
 
         Method[] methods = clazz.getMethods();
 
-        List<Wrapper> wrappers = Wrapper.wrap(methods, methodName);
+        List<Wrapper> wrappers = Wrapper.wrap(clazz, methods, methodName);
 
         Wrapper result = findWrapper(clazz, wrappers, methodName, paramTypes, paramValues);
 
@@ -614,7 +614,7 @@ class ELUtil {
         return null;
     }
 
-    
+
     static boolean canAccess(Object base, AccessibleObject accessibleObject) {
         try {
             return accessibleObject.canAccess(base);
@@ -622,8 +622,8 @@ class ELUtil {
             return false;
         }
     }
-    
-    
+
+
     @SuppressWarnings("null") // params cannot be null when used
     static Object[] buildParameters(ELContext context, Class<?>[] parameterTypes, boolean isVarArgs, Object[] params) {
         Object[] parameters = null;
@@ -659,10 +659,12 @@ class ELUtil {
 
     private abstract static class Wrapper {
 
-        public static List<Wrapper> wrap(Method[] methods, String name) {
+        public static List<Wrapper> wrap(Class<?> clazz, Method[] methods, String name) {
             List<Wrapper> result = new ArrayList<>();
             for (Method method : methods) {
-                if (method.getName().equals(name)) {
+                if (method.getName().equals(name)
+                        // bridge check added for https://issues.jboss.org/browse/JBEE-165
+                        && !(method.isBridge() && !method.getDeclaringClass().equals(clazz))) {
                     result.add(new MethodWrapper(method));
                 }
             }
