@@ -105,7 +105,7 @@ public abstract class ExpressionFactory {
      * @return a new <code>ExpressionFactory</code> instance
      */
     public static ExpressionFactory newInstance() {
-        return ExpressionFactory.newInstance(null);
+        return ExpressionFactory.newInstance(ELManager.properties);
     }
 
     /**

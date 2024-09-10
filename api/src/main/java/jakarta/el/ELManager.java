@@ -26,8 +26,21 @@ import java.lang.reflect.Method;
  * @since Jakarta Expression Language 3.0
  */
 public class ELManager {
+    private static final String EL_BC22_PROPERTY= "org.wildfly.el.bc2.2";
 
-    private static ExpressionFactory exprFactory = ExpressionFactory.newInstance();
+    static final java.util.Properties properties = new java.util.Properties();
+    static {
+        setupProperties();
+    }
+
+    private static void setupProperties(){
+        boolean bc22Enabled = Boolean.getBoolean(EL_BC22_PROPERTY);
+        if (bc22Enabled) {
+            properties.setProperty("jakarta.el.bc2.2", "true");
+        }
+    }
+
+    private static ExpressionFactory exprFactory = ExpressionFactory.newInstance(properties);
 
     private StandardELContext elContext;
 
