@@ -437,12 +437,19 @@ public abstract class ELContext {
             setPropertyResolved(propertyResolvedSave);
         }
 
+        // TODO It is not clear why the JBoss fork of this lib has traditionally replaced
+        // the following logic with the simpler call below. It means calling putContext(ExpressionFactory.class, xxx)
+        // would have no effect. We don't do this in WildFly, and the simpler call saves a map
+		// lookup, but this does not seem like a necessary delta to upstream.
+        /*
         ExpressionFactory exprFactory = (ExpressionFactory) getContext(ExpressionFactory.class);
         if (exprFactory == null) {
             exprFactory = ELManager.getExpressionFactory();
         }
 
         return exprFactory.coerceToType(obj, targetType);
+        */
+        return ELManager.getExpressionFactory().coerceToType(obj, targetType);
     }
 
 }
