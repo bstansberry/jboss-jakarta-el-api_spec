@@ -1,3 +1,7 @@
+/*
+ * Copyright The JBoss Jakarta EL API Authors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package jakarta.el;
 
 import org.junit.jupiter.api.Assertions;

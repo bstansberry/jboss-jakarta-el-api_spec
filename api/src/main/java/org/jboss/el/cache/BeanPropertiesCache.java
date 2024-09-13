@@ -1,3 +1,7 @@
+/*
+ * Copyright The JBoss Jakarta EL API Authors
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package org.jboss.el.cache;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
