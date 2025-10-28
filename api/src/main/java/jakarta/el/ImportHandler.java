@@ -29,6 +29,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.jboss.el.cache.ImportHandlerCache;
+
 /**
  * Handles imports of class names and package names. An imported package name implicitly imports all the classes in the
  * package. A class that has been imported can be used without its package name. The name is resolved to its full
@@ -153,31 +155,38 @@ public class ImportHandler {
 
     private Class<?> getClassFor(String className) {
         if (!notAClass.contains(className)) {
-            ClassLoader classLoader;
-            try {
-                if (System.getSecurityManager() == null) {
-                    classLoader = Thread.currentThread().getContextClassLoader();
-                } else {
-                    classLoader = AccessController.doPrivileged(
-                            new PrivilegedAction<ClassLoader>() {
-                                public ClassLoader run() {
-                                    return Thread.currentThread().getContextClassLoader();
-                                }
-                            });
-                }
-
-                return Class.forName(className, false, classLoader);
-                // Some operating systems have case-insensitive path names. An example is Windows if className is
-                // attempting to be resolved from a wildcard import a java.lang.NoClassDefFoundError may be thrown as
-                // the expected case for the type likely doesn't match. See 
-                // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8024775 and 
-                // https://bugs.openjdk.java.net/browse/JDK-8133522.
-            } catch (ClassNotFoundException | NoClassDefFoundError ex) {
+            ClassLoader tccl = getContextClassLoader();
+            if (ImportHandlerCache.hasClassloadingMiss(tccl, className)) {
+                // skip the ImportHandlerCache check next time
                 notAClass.add(className);
+            } else {
+                try {
+                    return Class.forName(className, false, tccl);
+                    // Some operating systems have case-insensitive path names. An example is Windows if className is
+                    // attempting to be resolved from a wildcard import a java.lang.NoClassDefFoundError may be thrown as
+                    // the expected case for the type likely doesn't match. See
+                    // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8024775 and
+                    // https://bugs.openjdk.java.net/browse/JDK-8133522.
+                } catch (ClassNotFoundException | NoClassDefFoundError ex) {
+                    notAClass.add(className);
+                    ImportHandlerCache.recordClassloadingMiss(tccl, className);
+                }
             }
         }
 
         return null;
+    }
+
+    private static ClassLoader getContextClassLoader() {
+
+        ClassLoader classLoader;
+        if (System.getSecurityManager() == null) {
+            classLoader = Thread.currentThread().getContextClassLoader();
+        } else {
+            classLoader = AccessController.doPrivileged(
+                    (PrivilegedAction<ClassLoader>) () -> Thread.currentThread().getContextClassLoader());
+        }
+        return classLoader;
     }
 
     private void checkModifiers(int modifiers) {
