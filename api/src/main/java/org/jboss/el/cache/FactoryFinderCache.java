@@ -42,6 +42,7 @@ public class FactoryFinderCache {
      */
     public static void clearClassLoader(final ClassLoader classLoader) {
         BeanPropertiesCache.clear(classLoader);
+        ImportHandlerCache.clearClassLoader(classLoader);
         final Iterator<Map.Entry<CacheKey, String>> it = CLASS_CACHE.entrySet().iterator();
         while (it.hasNext()) {
             final CacheKey key = it.next().getKey();
@@ -121,36 +122,6 @@ public class FactoryFinderCache {
         }
 
         return line;
-    }
-
-    private static class CacheKey {
-        private final ClassLoader loader;
-        private final String className;
-
-        private CacheKey(final ClassLoader loader, final String className) {
-            this.loader = loader;
-            this.className = className;
-        }
-
-        @Override
-        public boolean equals(final Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            final CacheKey cacheKey = (CacheKey) o;
-
-            if (className != null ? !className.equals(cacheKey.className) : cacheKey.className != null) return false;
-            if (loader != null ? !loader.equals(cacheKey.loader) : cacheKey.loader != null) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = loader != null ? loader.hashCode() : 0;
-            result = 31 * result + (className != null ? className.hashCode() : 0);
-            return result;
-        }
     }
 
 
