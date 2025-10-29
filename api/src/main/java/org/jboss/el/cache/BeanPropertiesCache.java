@@ -14,7 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Stuart Douglas
+ * @deprecated for removal in a future major release.
  */
+@Deprecated
 public class BeanPropertiesCache {
 
     static private class BPSoftReference extends SoftReference<Object> {
