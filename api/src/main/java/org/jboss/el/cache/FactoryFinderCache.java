@@ -31,7 +31,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Stuart Douglas
+ * @deprecated for removal in a future major release.
  */
+@Deprecated
 public class FactoryFinderCache {
 
     private static final Map<CacheKey, String> CLASS_CACHE = new ConcurrentHashMap<CacheKey, String>();

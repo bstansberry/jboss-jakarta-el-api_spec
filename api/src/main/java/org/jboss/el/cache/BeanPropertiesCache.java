@@ -39,7 +39,9 @@ import jakarta.el.ELException;
 
 /**
  * @author Stuart Douglas
+ * @deprecated for removal in a future major release.
  */
+@Deprecated
 public class BeanPropertiesCache {
 
     static private class BPSoftReference extends SoftReference<BeanProperties> {
