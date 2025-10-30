@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>39</version>
+        <version>50</version>
     </parent>
 
     <groupId>org.jboss.spec.jakarta.el</groupId>
@@ -93,6 +93,13 @@
             <url>https://github.com/eclipse-ee4j/el-ri/graphs/contributors</url>
         </contributor>
     </contributors>
+
+    <properties>
+        <!-- Settings used by the jboss-release profile to drive the nxrm3-maven-plugin -->
+        <nexus.repository.staging>wildfly-staging</nexus.repository.staging>
+        <nexus.repository.release>releases</nexus.repository.release> <!-- this is the value from jboss-parent, so we could drop it here -->
+        <nexus.staging.tag>jboss-jakarta-el-api_spec-${project.version}</nexus.staging.tag>
+    </properties>
 
     <modules>
         <module>api</module>
