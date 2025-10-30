@@ -36,52 +36,6 @@
     <description>
         Jakarta Expression Language defines an expression language for Java applications
     </description>
-    <url>https://github.com/jboss/jboss-jakarta-el-api_spec</url>
-
-    <developers>
-        <developer>
-            <id>jakarta-ee4j-el</id>
-            <name>Jakarta Expression Language Developers</name>
-            <organization>Eclipse Foundation</organization>
-            <email>el-dev@eclipse.org</email>
-        </developer>
-    </developers>
-    <contributors>
-        <contributor>
-            <name>Jakarta Expression Language Contributors</name>
-            <email>el-dev@eclipse.org</email>
-            <url>https://github.com/eclipse-ee4j/el-ri/graphs/contributors</url>
-        </contributor>
-    </contributors>
-
-    <licenses>
-        <license>
-            <name>EPL 2.0</name>
-            <url>http://www.eclipse.org/legal/epl-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-        <license>
-            <name>GPL2 w/ CPE</name>
-            <url>https://www.gnu.org/software/classpath/license.html</url>
-            <distribution>repo</distribution>
-        </license>
-      <license>
-            <name>Apache 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <connection>scm:git:git@github.com:jboss/jboss-jakarta-el-api_spec.git</connection>
-        <developerConnection>scm:git:git@github.com:jboss/jboss-jakarta-el-api_spec.git</developerConnection>
-        <url>https://github.com/jboss/jboss-jakarta-el-api_spec</url>
-        <tag>HEAD</tag>
-    </scm>
-    <issueManagement>
-        <system>github</system>
-        <url>https://issues.redhat.com/projects/JBEE</url>
-    </issueManagement>
 
     <properties>
         <!-- Make sure the two versions are in sync with the maven version -->
