@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>46</version>
+        <version>51</version>
     </parent>
 
     <groupId>jakarta.el</groupId>
@@ -32,13 +32,10 @@
     <packaging>pom</packaging>
     <version>6.0.1-jbossorg-1-SNAPSHOT</version>
 
-    <name>Jakarta Expression Language</name>
-    <description>Jakarta Expression Language</description>
-    <url>https://projects.eclipse.org/projects/ee4j.el</url>
-    <modules>
-        <module>api</module>
-    </modules>
-	
+    <name>WildFly Jakarta Expression Language API -- Parent</name>
+    <description>Jakarta Expression Language API for use in a WildFly server</description>
+    <url>https://github.com/wildfly/jboss-jakarta-el-api_spec</url>
+
     <licenses>
         <license>
             <name>EPL 2.0</name>
@@ -56,6 +53,52 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:wildfly/jboss-jakarta-el-api_spec.git</connection>
+        <developerConnection>scm:git:git@github.com:wildfly/jboss-jakarta-el-api_spec.git</developerConnection>
+        <url>https://github.com/wildfly/jboss-jakarta-el-api_spec</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/wildfly/jboss-jakarta-el-api_spec/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>wildfly.org</id>
+            <name>WildFly Community</name>
+            <organization>wildfly.org</organization>
+            <organizationUrl>https://wildfly.org</organizationUrl>
+            <email>wildfly-dev@lists.jboss.org</email>
+        </developer>
+        <developer>
+            <id>jakarta-ee4j-el</id>
+            <name>Jakarta Expression Language Developers</name>
+            <organization>Eclipse Foundation</organization>
+            <email>el-dev@eclipse.org</email>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Jakarta Expression Language Contributors</name>
+            <email>el-dev@eclipse.org</email>
+            <url>https://github.com/eclipse-ee4j/el-ri/graphs/contributors</url>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <!-- Settings used by the jboss-release profile to drive the nxrm3-maven-plugin -->
+        <nexus.repository.staging>wildfly-staging</nexus.repository.staging>
+        <nexus.repository.release>releases</nexus.repository.release> <!-- this is the value from jboss-parent, so we could drop it here -->
+        <nexus.staging.tag>jboss-jakarta-el-api_spec-${project.version}</nexus.staging.tag>
+    </properties>
+
+    <modules>
+        <module>api</module>
+    </modules>
 
     <build>
         <plugins>
